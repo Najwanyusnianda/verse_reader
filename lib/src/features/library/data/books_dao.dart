@@ -15,7 +15,7 @@ part 'books_dao.g.dart';
 @DriftAccessor(tables: [Books])
 class BooksDao extends DatabaseAccessor<AppDatabase> with _$BooksDaoMixin {
   // The constructor is required. It takes the main database class as a parameter.
-  BooksDao(AppDatabase db) : super(db);
+  BooksDao(super.db);
 
   /// --- READ operations ---
 

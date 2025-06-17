@@ -15,6 +15,12 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
         isCoreLibraryDesugaringEnabled = true
     }
+    // Enable Java 8 desugaring for the Android Gradle Plugin.
+    dependencies {
+        // Add this line
+        coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
+        // ...existing code...
+    }
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()

@@ -15,7 +15,7 @@ part 'notes_dao.g.dart';
 class NotesDao extends DatabaseAccessor<AppDatabase> with _$NotesDaoMixin {
   /// Creates a new NotesDao instance.
   /// Requires an instance of [AppDatabase] to interact with the database.
-  NotesDao(AppDatabase db) : super(db);
+  NotesDao(super.db);
 
   /// Watches all notes associated with a specific book ID.
   /// The results are ordered by the location in the book.

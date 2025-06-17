@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:verse_reader/src/core/database/app_database.dart';
-import 'package:verse_reader/src/features/library/domain/book_repository.dart';
 import 'package:verse_reader/src/features/library/presentation/providers/library_providers.dart';
 import 'package:verse_reader/src/features/library/presentation/widgets/book_grid_item.dart';
+import 'package:verse_reader/src/features/library/presentation/widgets/pick_and_add_book.dart';
 
 /// The main screen for browsing and managing the user's book library.
 ///
@@ -129,9 +129,18 @@ class LibraryHomeScreen extends ConsumerWidget {
         onPressed: () {
           // TODO: Implement import book flow
           // This will be connected to the book import functionality
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Add book functionality coming soon!')),
-          );
+          // add loader to indicate the import process
+          // and handle any errors that may occur.
+          // For now, we will call the pickAndAddBook method.
+
+           PickAndAddBook.pickAndAddBook(context, ref);
+           // Show a loading indicator while the book is being added
+           showDialog(
+             context: context,
+             barrierDismissible: false,
+             builder: (context) => const Center(child: CircularProgressIndicator()),
+           );
+
         },
         child: const Icon(Icons.add),
       ),
