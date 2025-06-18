@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
 import 'package:verse_reader/src/core/database/app_database.dart';
+import 'package:go_router/go_router.dart';
 
 class BookGridItem extends StatelessWidget {
   const BookGridItem({super.key, required this.book});
@@ -17,7 +18,8 @@ class BookGridItem extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        // TODO: Navigate to reader screen
+        // Navigate to the reader screen, passing the book's ID in the path.
+        context.go('/reader/${book.id}');
       },
       borderRadius: BorderRadius.circular(12),
       child: Column(

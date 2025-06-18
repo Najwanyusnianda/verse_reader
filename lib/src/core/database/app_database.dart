@@ -13,6 +13,7 @@ import 'package:verse_reader/src/core/database/tables.dart';
 // Import the future DAO files
 import 'package:verse_reader/src/features/library/data/books_dao.dart';
 import 'package:verse_reader/src/features/notes/data/notes_dao.dart';
+
 // This is a special Drift-generated file. It doesn't exist yet.
 // We will run a command to create it in the next step.
 // The name is derived from this file's name (`app_database.dart`).
@@ -41,11 +42,18 @@ class AppDatabase extends _$AppDatabase {
 /// to the database file on the device.
 LazyDatabase _openConnection() {
   return LazyDatabase(() async {
-    // Get the folder where the app can safely store files.
-    final dbFolder = await getApplicationDocumentsDirectory();
-    // Create a file named 'db.sqlite' in that folder.
-    final file = File(p.join(dbFolder.path, 'db.sqlite'));
-    // Use Drift's NativeDatabase class to open the connection.
-    return NativeDatabase.createInBackground(file);
+    try {
+      final dbFolder = await getApplicationDocumentsDirectory();
+      final file = File(p.join(dbFolder.path, 'db.sqlite'));
+      
+      // Add logging to see what's happening
+      return NativeDatabase.createInBackground(
+        file,
+        logStatements: true, // This will log all SQL statements
+      );
+    } catch (e) {
+      print('Error opening database: $e');
+      rethrow;
+    }
   });
 }

@@ -6,18 +6,9 @@ part of 'app_router.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$goRouterHash() => r'1bf50e48da4f0dbb2eda65d3c927da7bce788e9b';
+String _$goRouterHash() => r'702c62a4cddff8841a26df0050c0d374113b92f7';
 
-/// A Riverpod provider that manages the app's routing configuration.
-///
-/// This provider uses `go_router` for declarative routing in the app.
-/// It's marked with `keepAlive: true` to maintain the router's state across rebuilds.
-///
-/// The router is configured with:
-/// - An initial route of '/library'
-/// - Named routes for each screen in the app
-///
-/// Copied from [goRouter].
+/// See also [goRouter].
 @ProviderFor(goRouter)
 final goRouterProvider = Provider<GoRouter>.internal(
   goRouter,

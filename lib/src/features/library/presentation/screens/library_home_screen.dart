@@ -135,11 +135,7 @@ class LibraryHomeScreen extends ConsumerWidget {
 
            PickAndAddBook.pickAndAddBook(context, ref);
            // Show a loading indicator while the book is being added
-           showDialog(
-             context: context,
-             barrierDismissible: false,
-             builder: (context) => const Center(child: CircularProgressIndicator()),
-           );
+ 
 
         },
         child: const Icon(Icons.add),

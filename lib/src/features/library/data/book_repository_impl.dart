@@ -3,7 +3,7 @@
 import 'package:verse_reader/src/core/database/app_database.dart';
 import 'package:verse_reader/src/features/library/data/books_dao.dart';
 import 'package:verse_reader/src/features/library/domain/book_repository.dart';
-
+import 'package:drift/drift.dart';
 /// The concrete implementation of [BookRepository] that uses the Drift DAO.
 /// This class knows how to talk to the local database via the [BooksDao].
 class DriftBookRepository implements BookRepository {
@@ -32,10 +32,27 @@ class DriftBookRepository implements BookRepository {
     }
   }
 
-  @override
-  Future<int> addBook(BooksCompanion bookData) {
-    return _booksDao.addBook(bookData);
+@override
+Future<int> addBook(BooksCompanion bookData) async {
+  try {
+    return await _booksDao.addBook(bookData);
+  } on DriftWrappedException catch (e) {
+    final message = e.toString().toLowerCase();
+
+    if (message.contains('unique')) {
+      throw Exception('This book is already in your library.');
+    }
+    if (message.contains('not null')) {
+      throw Exception('Required book information is missing.');
+    }
+
+    print('Database error: $e');
+    rethrow;
+  } catch (e) {
+    print('Unexpected error adding book: $e');
+    rethrow;
   }
+}
 
   @override
   Future<bool> updateBook(BooksCompanion bookData) {

@@ -1,12 +1,9 @@
 // lib/main.dart
 
-import 'package:drift/drift.dart' show Value; // <-- IMPORTANT: Add this import!
+// <-- IMPORTANT: Add this import!
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:verse_reader/src/app.dart';
-import 'package:verse_reader/src/core/database/app_database.dart';
-import 'package:verse_reader/src/features/library/presentation/providers/library_providers.dart';
-import 'package:drift/drift.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -20,14 +17,10 @@ void main() async {
   //   return true;
   // }());
 
-  runApp(
-    // We pass the existing container to ProviderScope so it doesn't
-    // re-create the providers.
-    UncontrolledProviderScope(
-      container: container,
-      child: const VerseReaderApp(),
-    ),
-  );
+  // We go back to the simple ProviderScope. No more container logic.
+  runApp(const ProviderScope(
+    child: VerseReaderApp(),
+  ));
 }
 
 // /// A debug-only function to populate the database with sample books.

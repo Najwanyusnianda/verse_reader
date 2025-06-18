@@ -55,6 +55,8 @@ dependencies:
 
   # File Handling
   file_picker: ^10.2.0
+  epub_view: ^3.2.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
